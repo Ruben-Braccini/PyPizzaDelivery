@@ -1,0 +1,91 @@
+print('Olá, seja bem-vindo a pizzaria Braccini!')
+
+def Cardapio():
+    print('-'*26+' Cardápio '+'-'*26)
+    print('| Código |   Sabores     |  Tam. Médio (M) | Tam. Grande (G) |')
+    print('|   21   |  Napolitana   |     R$20.00     |     R$26.00     |')
+    print('|   22   |  Margherita   |     R$20.00     |     R$26.00     |')
+    print('|   23   |  Calabresa    |     R$25.00     |     R$32.50     |')
+    print('|   24   |  Toscana      |     R$30.00     |     R$39.00     |')
+    print('|   25   |  Portuguesa   |     R$30.00     |     R$39.00     |')
+    print('-'*62)
+
+# Corpo da Operação:
+def OperacaoValor(sub):
+    while True:
+        tam = input('Digite o tamanho da pizza que deseja (M/G): ')
+        if (tam == 'M' or tam == 'm') or (tam == 'G' or tam == 'g'):  # aceita M/m ou G/g.
+            try:
+                cod = int(input('Digite o Código referente ao sabor desejado: '))
+                if cod == 21:     # Napolitana.
+                    res = 'Napolitana'
+                    if tam == 'M' or tam == 'm':  # Preço do tam. Médio.
+                        sub = 20
+                    else:  # Preço do tam. Grande.
+                        sub = 26
+                elif cod == 22:   # Margherita.
+                    res = 'Margherita'
+                    if tam == 'M' or tam == 'm':  # Preço do tam. Médio.
+                        sub = 20
+                    else:   # Preço do tam. Grande.
+                        sub = 26
+                elif cod == 23:   # Calabresa.
+                    res = 'Calabresa'
+                    if tam == 'M' or tam == 'm':  # Preço do tam. Médio.
+                        sub = 25
+                    else:  # Preço do tam. Grande
+                        sub = 32.5
+                elif cod == 24:   # Toscana.
+                    res = 'Toscana'
+                    if tam == 'M' or tam == 'm':  # Preço do tam. Médio.
+                        sub = 30
+                    else:   # Preço do tam. Grande
+                        sub = 39
+                elif cod == 25:   # Portuguesa.
+                    res = 'Portuguesa'
+                    if tam == 'M' or tam == 'm':  # Preço do tam. Médio.
+                        sub = 30
+                    else:   # Preço do tam. Grande
+                        sub = 39
+                else:
+                    OpcaoInvalida()
+                    continue
+
+                print('Você pediu uma pizza sabor: {}, tamanho: {}'.format(res, tam))
+                return sub
+            except:
+                OpcaoInvalida()
+                continue
+        else:
+            OpcaoInvalida()
+            continue
+
+# Validação de Entrada (Int) 0 ou 1:
+def ValidacaoInt (q, min, max):
+    while (True):
+        try:
+            x = int(input(q))
+            while (x < min) or (x > max):
+                OpcaoInvalida()
+                x = int(input(q))
+            return x
+        except:
+            OpcaoInvalida()
+
+# Mensagem: "Dados inválidos...".
+def OpcaoInvalida():
+    print('Opção Inválida. Por favor, verifique os dados digitados e tente novamente.')
+
+Cardapio()  # Rep. Cardápio
+sub = float(0)
+
+while (True):
+    sub += OperacaoValor(sub)
+    acr = ValidacaoInt('Você deseja pedir mais alguma pizza?\n1 - para SIM\n0 - para NÃO\nDigite (1 ou 0): ', 0, 1)
+    if (acr == 1):
+        continue
+    else:
+        print('O total a ser pago é R${:.2f}'.format(sub))
+        break
+
+print('Muito obrigado por escolher a pizzaria Braccini! Volte sempre!')
